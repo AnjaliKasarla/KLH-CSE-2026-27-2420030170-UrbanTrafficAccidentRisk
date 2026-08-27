@@ -10,7 +10,7 @@
 | ------------------- | ----------: |
 | **Anjali Kasarla**  |  2420030170 |
 | **Vinusha Muppala** |  2420030212 |
-| **Lasya Geethika**  |  2420030678 |
+| **Lasya Geethika**  |  2420030686 |
 
 ### Academic Details
 
@@ -1455,7 +1455,7 @@ Current development areas include:
 * [x] Project planning
 * [x] Problem definition
 * [x] Methodology design
-* [ ] Dataset collection
+* [x] Dataset collection
 * [ ] Data preprocessing
 * [ ] Exploratory data analysis
 * [ ] NLP pipeline
@@ -1578,7 +1578,7 @@ In the future, the proposed system can be extended with real-time traffic, GPS, 
 
 ### Lasya Geethika
 
-**Roll Number:** 2420030678
+**Roll Number:** 2420030686
 
 ---
 
