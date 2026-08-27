@@ -131,7 +131,8 @@ Low / Medium / High
       ↓
 Explainable Prediction
 ```
-# SDG Impact
+---
+# 🌍 SDG Impact
 - **SDG Impact:** Supports **SDG 11 – Sustainable Cities and Communities** and **SDG 3 – Good Health and Well-being** through improved road safety and smarter traffic management.
 
 - **Innovation Impact:** Combines **NLP, Machine Learning, Deep Learning, and Explainable AI (SHAP/LIME)** for accident-risk prediction and interpretation.
