@@ -131,11 +131,14 @@ Low / Medium / High
       ↓
 Explainable Prediction
 ```
-# 🌍 Impact & Sustainability
-SDG Impact: Supports SDG 11 – Sustainable Cities and Communities by improving urban road safety and enabling smarter traffic management. It also contributes to SDG 3 – Good Health and Well-being by helping reduce traffic-related injuries and accidents.
-Innovation Impact: Combines NLP, Machine Learning, Deep Learning, and Explainable AI (SHAP/LIME) to predict and understand urban accident risk.
-Industry Impact: Can help transportation departments, smart-city systems, traffic management authorities, and logistics companies identify high-risk conditions and improve traffic safety planning.
-Societal Impact: Can contribute to safer roads, reduced accidents, improved emergency preparedness, and greater public awareness of high-risk traffic conditions.
+# SDG Impact
+- **SDG Impact:** Supports **SDG 11 – Sustainable Cities and Communities** and **SDG 3 – Good Health and Well-being** through improved road safety and smarter traffic management.
+
+- **Innovation Impact:** Combines **NLP, Machine Learning, Deep Learning, and Explainable AI (SHAP/LIME)** for accident-risk prediction and interpretation.
+
+- **Industry Impact:** Helps **traffic authorities, smart-city systems, transportation departments, and logistics companies** identify high-risk conditions and improve safety planning.
+
+- **Societal Impact:** Promotes **safer roads, reduced accident risks, better emergency preparedness, and public awareness**.
 ---
 
 # 💡 Motivation
