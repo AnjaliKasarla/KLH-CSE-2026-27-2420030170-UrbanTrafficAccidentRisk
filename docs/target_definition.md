@@ -1,14 +1,18 @@
-# Target Definition
+# \# Target Definition
 
-Status: PENDING ACTUAL DATASET PROFILING
+# 
 
-The final Low / Medium / High target definition will be determined only after inspecting the finalized datasets.
+# \## 1. Target Variable
 
-We will document:
-- source target field(s);
-- target transformation, if any;
-- class distribution;
-- class imbalance handling;
-- possible leakage;
-- final Low/Medium/High definition;
-- justification.
+# 
+
+# The prediction target for the Urban Traffic Accident Risk Assessment
+
+# and Prediction project is:
+
+# 
+
+# ```text
+
+# Accident\_Severity
+
