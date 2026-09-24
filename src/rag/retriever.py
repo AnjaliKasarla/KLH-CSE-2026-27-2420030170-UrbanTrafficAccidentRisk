@@ -38,10 +38,26 @@ class SafetyRetriever:
             )
         )
 
-        return self.vector_store.search(
+        # Retrieve extra candidates first so low-value
+        # document metadata chunks can be filtered out.
+        candidates = self.vector_store.search(
             query_embedding=query_embedding,
-            top_k=top_k,
+            top_k=min(top_k + 3, len(self.vector_store.metadata)),
         )
+
+        excluded_chunks = {
+            "road_safety_guidelines.md::chunk_0",
+            "road_safety_guidelines.md::chunk_1",
+            "road_safety_guidelines.md::chunk_11",
+        }
+
+        results = [
+            result
+            for result in candidates
+            if result["chunk_id"] not in excluded_chunks
+        ]
+
+        return results[:top_k]
 
 
 if __name__ == "__main__":

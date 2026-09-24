@@ -13,3 +13,6 @@ shap
 lime
 huggingface_hub
 python-dotenv
+
+fastapi
+uvicorn[standard]
