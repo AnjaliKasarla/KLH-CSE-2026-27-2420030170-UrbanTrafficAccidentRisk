@@ -1,88 +1,145 @@
+# ============================================================
+# Urban Traffic Accident Risk Assessment & Prediction
+# ============================================================
+
+# ------------------------------------------------------------
 # Python
+# ------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.so
 
+# ------------------------------------------------------------
 # Virtual environments
+# ------------------------------------------------------------
 .venv/
 venv/
 env/
 ENV/
 
-# Jupyter
-.ipynb_checkpoints/
-
+# ------------------------------------------------------------
 # Environment / secrets
+# ------------------------------------------------------------
 .env
 .env.*
 !.env.example
 
+# ------------------------------------------------------------
+# Jupyter
+# ------------------------------------------------------------
+.ipynb_checkpoints/
+
+# ------------------------------------------------------------
 # Data files
-data/raw/*
-data/interim/*
-data/processed/*
-data/external/*
+# Large/raw/generated data should NOT be committed
+# ------------------------------------------------------------
+Code/backend/data/raw/*
+Code/backend/data/interim/*
+Code/backend/data/processed/*
+Code/backend/data/external/*
 
-# Keep data directory structure
-!data/raw/.gitkeep
-!data/raw/road_accident/.gitkeep
-!data/raw/traffic_accidents/.gitkeep
+# Keep required data directory structure
+!Code/backend/data/raw/road_accident/.gitkeep
+!Code/backend/data/raw/traffic_accidents/.gitkeep
 
-!data/interim/.gitkeep
-!data/interim/road_accident/.gitkeep
-!data/interim/traffic_accidents/.gitkeep
-!data/interim/integrated/.gitkeep
+!Code/backend/data/interim/road_accident/.gitkeep
+!Code/backend/data/interim/traffic_accidents/.gitkeep
+!Code/backend/data/interim/integrated/.gitkeep
 
-!data/processed/.gitkeep
-!data/processed/structured/.gitkeep
-!data/processed/text/.gitkeep
-!data/processed/final/.gitkeep
+!Code/backend/data/processed/structured/.gitkeep
+!Code/backend/data/processed/text/.gitkeep
+!Code/backend/data/processed/final/.gitkeep
 
-!data/external/.gitkeep
-!data/external/knowledge_base/.gitkeep
+!Code/backend/data/external/knowledge_base/.gitkeep
+!Code/backend/data/external/knowledge_base/*.md
 
+# ------------------------------------------------------------
 # Model artifacts
-models/artifacts/*
-models/metadata/*
+# Generated/trained model binaries should NOT be committed
+# ------------------------------------------------------------
+Code/backend/models/artifacts/*
+Code/backend/models/metadata/*
 
-!models/artifacts/.gitkeep
-!models/metadata/.gitkeep
+!Code/backend/models/artifacts/.gitkeep
+!Code/backend/models/metadata/.gitkeep
 
+# ------------------------------------------------------------
 # Generated reports
-reports/figures/*
-reports/metrics/*
-reports/final/*
+# ------------------------------------------------------------
+Code/backend/reports/figures/*
+Code/backend/reports/metrics/*
+Code/backend/reports/final/*
 
-!reports/figures/.gitkeep
-!reports/metrics/.gitkeep
-!reports/final/.gitkeep
+!Code/backend/reports/figures/.gitkeep
+!Code/backend/reports/metrics/.gitkeep
+!Code/backend/reports/final/.gitkeep
 
+# ------------------------------------------------------------
 # Logs
+# ------------------------------------------------------------
 *.log
 logs/
 
-# OS
+# ------------------------------------------------------------
+# OS generated files
+# ------------------------------------------------------------
 .DS_Store
 Thumbs.db
 desktop.ini
+*.lnk
 
-# IDE
+# Microsoft Office temporary / lock files
+~$*
+*.tmp
+
+# ------------------------------------------------------------
+# IDE / Editors
+# ------------------------------------------------------------
 .vscode/
 .idea/
+*.code-workspace
 
-# Build
+# ------------------------------------------------------------
+# Build / Distribution
+# ------------------------------------------------------------
 build/
 dist/
 *.egg-info/
 
-# Testing
+# ------------------------------------------------------------
+# Testing / Coverage
+# ------------------------------------------------------------
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.pytest_cache/
 
+# ------------------------------------------------------------
 # Temporary files
-*.tmp
+# ------------------------------------------------------------
 *.temp
 *.swp
 *.swo
+*.bak
+*.orig
+
+# ------------------------------------------------------------
+# Frontend - Node
+# ------------------------------------------------------------
+Code/frontend/node_modules/
+Code/frontend/dist/
+Code/frontend/.vite/
+Code/frontend/.cache/
+
+# Frontend environment files
+Code/frontend/.env
+Code/frontend/.env.*
+!Code/frontend/.env.example
+
+# ------------------------------------------------------------
+# TypeScript
+# ------------------------------------------------------------
+*.tsbuildinfo
