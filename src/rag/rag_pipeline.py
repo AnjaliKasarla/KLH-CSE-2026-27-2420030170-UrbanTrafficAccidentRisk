@@ -1,10 +1,10 @@
 from typing import Dict, List, Optional
 
-from context_builder import (
+from .context_builder import (
     build_accident_context,
     build_rag_query,
 )
-from retriever import SafetyRetriever
+from .retriever import SafetyRetriever
 
 
 class RAGPipeline:
@@ -30,13 +30,19 @@ class RAGPipeline:
         accident_features: Dict[str, object],
         predicted_risk: str,
         probabilities: Optional[Dict[str, float]] = None,
-        shap_contributions: Optional[List[Dict[str, object]]] = None,
+        shap_contributions: Optional[
+            List[Dict[str, object]]
+        ] = None,
         top_k: int = 3,
     ) -> Dict[str, object]:
         """
         Build accident context, retrieve relevant safety knowledge,
         and return the complete grounded context.
         """
+
+        # -----------------------------------------------------------
+        # Build accident context
+        # -----------------------------------------------------------
 
         accident_context = build_accident_context(
             accident_features=accident_features,
@@ -45,15 +51,27 @@ class RAGPipeline:
             shap_contributions=shap_contributions,
         )
 
+        # -----------------------------------------------------------
+        # Build semantic-search query
+        # -----------------------------------------------------------
+
         rag_query = build_rag_query(
             accident_features=accident_features,
             predicted_risk=predicted_risk,
         )
 
+        # -----------------------------------------------------------
+        # Retrieve relevant safety knowledge
+        # -----------------------------------------------------------
+
         retrieved_knowledge = self.retriever.retrieve(
             query=rag_query,
             top_k=top_k,
         )
+
+        # -----------------------------------------------------------
+        # Return complete RAG result
+        # -----------------------------------------------------------
 
         return {
             "predicted_risk": predicted_risk,
@@ -63,6 +81,10 @@ class RAGPipeline:
             "retrieved_knowledge": retrieved_knowledge,
         }
 
+
+# -------------------------------------------------------------------
+# Standalone RAG test
+# -------------------------------------------------------------------
 
 if __name__ == "__main__":
 
@@ -117,6 +139,10 @@ if __name__ == "__main__":
     print("\nRAG QUERY")
     print("=" * 70)
     print(result["rag_query"])
+
+    print("\nACCIDENT CONTEXT")
+    print("=" * 70)
+    print(result["accident_context"])
 
     print("\nRETRIEVED SAFETY KNOWLEDGE")
     print("=" * 70)

@@ -8,3 +8,8 @@ seaborn
 jupyter
 torch
 transformers
+sentence-transformers
+shap
+lime
+huggingface_hub
+python-dotenv
