@@ -1,0 +1,43 @@
+project:
+  name: urban-traffic-accident-risk
+  random_seed: 42
+
+data:
+  road_accident_path: data/raw/road_accident
+  traffic_accidents_path: data/raw/traffic_accidents
+  interim_path: data/interim
+  processed_path: data/processed
+  knowledge_base_path: data/external/knowledge_base
+
+nlp:
+  baseline: tfidf
+  transformer: distilbert-base-uncased
+  max_length: 256
+
+target:
+  classes:
+    - Low
+    - Medium
+    - High
+  status: pending_dataset_profiling
+
+models:
+  candidates:
+    - logistic_regression
+    - decision_tree
+    - random_forest
+    - svm
+    - xgboost
+
+explainability:
+  shap: true
+  lime: true
+
+rag:
+  enabled: false
+
+dashboard:
+  framework: streamlit
+
+api:
+  framework: fastapi

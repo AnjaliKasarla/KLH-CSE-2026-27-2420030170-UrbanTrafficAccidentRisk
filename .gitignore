@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Data files
+data/raw/*
+data/interim/*
+data/processed/*
+data/external/*
+
+# Keep data directory structure
+!data/raw/.gitkeep
+!data/raw/road_accident/.gitkeep
+!data/raw/traffic_accidents/.gitkeep
+
+!data/interim/.gitkeep
+!data/interim/road_accident/.gitkeep
+!data/interim/traffic_accidents/.gitkeep
+!data/interim/integrated/.gitkeep
+
+!data/processed/.gitkeep
+!data/processed/structured/.gitkeep
+!data/processed/text/.gitkeep
+!data/processed/final/.gitkeep
+
+!data/external/.gitkeep
+!data/external/knowledge_base/.gitkeep
+
+# Model artifacts
+models/artifacts/*
+models/metadata/*
+
+!models/artifacts/.gitkeep
+!models/metadata/.gitkeep
+
+# Generated reports
+reports/figures/*
+reports/metrics/*
+reports/final/*
+
+!reports/figures/.gitkeep
+!reports/metrics/.gitkeep
+!reports/final/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
