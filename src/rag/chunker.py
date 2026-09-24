@@ -3,7 +3,7 @@ from typing import Dict, List
 
 
 def _split_into_sections(text: str) -> List[str]:
-    """Split Markdown content using level-2 headings."""
+    """Split Markdown content at level-2 headings."""
 
     sections = re.split(r"(?m)(?=^##\s+)", text)
 
@@ -19,46 +19,113 @@ def _split_large_section(
     chunk_size: int,
     chunk_overlap: int,
 ) -> List[str]:
-    """Split an oversized section while preserving overlap."""
+    """
+    Split a large section using paragraph boundaries first.
+
+    Paragraphs are kept intact whenever possible. If a single
+    paragraph is too large, it is split using sentence boundaries.
+    """
+
+    paragraphs = re.split(r"\n\s*\n", section)
 
     chunks = []
+    current = ""
 
-    start = 0
+    for paragraph in paragraphs:
+        paragraph = paragraph.strip()
 
-    while start < len(section):
-        end = min(start + chunk_size, len(section))
+        if not paragraph:
+            continue
 
-        chunk = section[start:end].strip()
+        candidate = (
+            f"{current}\n\n{paragraph}".strip()
+            if current
+            else paragraph
+        )
 
-        if chunk:
-            chunks.append(chunk)
+        if len(candidate) <= chunk_size:
+            current = candidate
+            continue
 
-        if end >= len(section):
-            break
+        if current:
+            chunks.append(current)
 
-        start = end - chunk_overlap
+        # If one paragraph itself exceeds the limit,
+        # split it using sentence boundaries.
+        if len(paragraph) > chunk_size:
+            sentences = re.split(
+                r"(?<=[.!?])\s+",
+                paragraph,
+            )
+
+            current = ""
+
+            for sentence in sentences:
+                sentence = sentence.strip()
+
+                if not sentence:
+                    continue
+
+                candidate = (
+                    f"{current} {sentence}".strip()
+                    if current
+                    else sentence
+                )
+
+                if len(candidate) <= chunk_size:
+                    current = candidate
+                else:
+                    if current:
+                        chunks.append(current)
+
+                    # Extremely long sentence fallback.
+                    if len(sentence) > chunk_size:
+                        for start in range(
+                            0,
+                            len(sentence),
+                            chunk_size - chunk_overlap,
+                        ):
+                            piece = sentence[
+                                start:start + chunk_size
+                            ].strip()
+
+                            if piece:
+                                chunks.append(piece)
+
+                        current = ""
+                    else:
+                        current = sentence
+
+        else:
+            current = paragraph
+
+    if current:
+        chunks.append(current)
 
     return chunks
 
 
 def chunk_documents(
     documents: List[Dict[str, str]],
-    chunk_size: int = 1000,
+    chunk_size: int = 1200,
     chunk_overlap: int = 100,
 ) -> List[Dict[str, str]]:
     """
-    Create section-aware chunks from Markdown documents.
+    Create clean, section-aware RAG chunks.
 
-    Markdown sections are kept together whenever possible.
-    Large sections are split using overlapping character windows.
+    Markdown sections are preserved.
+    Paragraphs are preserved whenever possible.
     """
 
     if chunk_size <= 0:
-        raise ValueError("chunk_size must be greater than 0.")
+        raise ValueError(
+            "chunk_size must be greater than 0."
+        )
 
     if chunk_overlap < 0 or chunk_overlap >= chunk_size:
         raise ValueError(
-            "chunk_overlap must be >= 0 and smaller than chunk_size."
+            "chunk_overlap must be >= 0 and smaller "
+            "than chunk_size."
         )
 
     chunks = []
@@ -101,7 +168,9 @@ def chunk_documents(
 if __name__ == "__main__":
     from document_loader import load_markdown_documents
 
-    knowledge_base_dir = "data/external/knowledge_base"
+    knowledge_base_dir = (
+        "data/external/knowledge_base"
+    )
 
     documents = load_markdown_documents(
         knowledge_base_dir
@@ -117,4 +186,4 @@ if __name__ == "__main__":
         print(f"Chunk ID: {chunk['chunk_id']}")
         print(f"Source: {chunk['source']}")
         print(f"Characters: {len(chunk['content'])}")
-        print(chunk["content"][:300])
+        print(f"Preview:\n{chunk['content'][:500]}")
