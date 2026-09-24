@@ -16,121 +16,121 @@ This directory contains the complete backend, machine-learning, NLP, explainabil
 
 ```text
 
-&#x20;                   ┌──────────────────────────────┐
+                         ┌──────────────────────────────┐
 
-&#x20;                   │      Accident Input Data     │
+                         │      Accident Input Data     │
 
-&#x20;                   └──────────────┬───────────────┘
+                         └──────────────┬───────────────┘
 
-&#x20;                                  │
+                                        │
 
-&#x20;                                  ▼
+                                        ▼
 
-&#x20;                   ┌──────────────────────────────┐
+                         ┌──────────────────────────────┐
 
-&#x20;                   │ Data Collection \& Validation  │
+                         │ Data Collection \& Validation │
 
-&#x20;                   └──────────────┬───────────────┘
+                         └──────────────┬───────────────┘
 
-&#x20;                                  │
+                                        │
 
-&#x20;                                  ▼
+                                        ▼
 
-&#x20;                   ┌──────────────────────────────┐
+                         ┌──────────────────────────────┐
 
-&#x20;                   │ Preprocessing \& EDA           │
+                         │    Preprocessing & EDA      │
 
-&#x20;                   └──────────────┬───────────────┘
+                         └──────────────┬───────────────┘
 
-&#x20;                                  │
+                                        │
 
-&#x20;                   ┌──────────────┴──────────────┐
+                         ┌──────────────┴──────────────┐
 
-&#x20;                   ▼                             ▼
+                         ▼                             ▼
 
-&#x20;         ┌──────────────────┐          ┌──────────────────┐
+               ┌──────────────────┐          ┌──────────────────┐
 
-&#x20;         │ Structured       │          │ Accident Context │
+               │ Structured       │          │ Accident Context │
 
-&#x20;         │ Features         │          │ Text Generation  │
+               │ Features         │          │ Text Generation  │
 
-&#x20;         └────────┬─────────┘          └────────┬─────────┘
+               └────────┬─────────┘          └────────┬─────────┘
 
-&#x20;                  │                             │
+                        │                             │
 
-&#x20;                  │                    ┌────────┴─────────┐
+                        │                    ┌────────┴─────────┐
 
-&#x20;                  │                    ▼                  ▼
+                        │                    ▼                  ▼
 
-&#x20;                  │               TF-IDF             BERT /
+                        │               TF-IDF             BERT /
 
-&#x20;                  │                                  DistilBERT
+                        │                                  DistilBERT
 
-&#x20;                  │                    │                  │
+                        │                    │                  │
 
-&#x20;                  └────────────────────┴──────────────────┘
+                        └────────────────────┴──────────────────┘
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             Feature Engineering
+                                   Feature Engineering
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             Feature Fusion / Selection
+                                   Feature Fusion / Selection
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                        ┌────────────────────────────┐
+                              ┌────────────────────────────┐
 
-&#x20;                        │ Model Training \& Evaluation │
+                              │ Model Training \& Evaluation │
 
-&#x20;                        │ LR / DT / RF / SVM / XGBoost│
+                              │ LR / DT / RF / SVM / XGBoost│
 
-&#x20;                        └──────────────┬─────────────┘
+                              └──────────────┬─────────────┘
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                              Risk Classification
+                                    Risk Classification
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             SHAP + LIME Explanation
+                                   SHAP + LIME Explanation
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             RAG Safety Retrieval
+                                   RAG Safety Retrieval
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             Hugging Face LLM
+                                   Hugging Face LLM
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                                 FastAPI API
+                                      FastAPI API
 
-&#x20;                                       │
+                                             │
 
-&#x20;                                       ▼
+                                             ▼
 
-&#x20;                             React Dashboard
+                                   React Dashboard
 
-2\. Project Pipeline
+## 2) Project Pipeline
 
 
 
@@ -180,7 +180,7 @@ The project does not contain native free-text accident narratives in the primary
 
 
 
-Phase 3 — Model Training \& Evaluation
+## Phase 3 — Model Training \& Evaluation
 
 
 
@@ -222,7 +222,7 @@ The machine-learning model remains responsible for the risk prediction. RAG and 
 
 
 
-3\. Directory Structure
+## 3) Directory Structure
 
 backend/
 
@@ -472,11 +472,11 @@ SHAP is used to identify feature contributions to model predictions.
 
 Prediction
 
-&#x20;   ↓
+   ↓
 
-&#x20; SHAP
+ SHAP
 
-&#x20;   ↓
+   ↓
 
 Feature Contributions
 
@@ -504,21 +504,21 @@ The RAG component retrieves relevant road-safety guidance from the project's kno
 
 Safety Query / Risk Context
 
-&#x20;         ↓
+         ↓
 
-&#x20;      Embedding
+      Embedding
 
-&#x20;         ↓
+         ↓
 
-&#x20;   Vector Similarity
+   Vector Similarity
 
-&#x20;         ↓
+         ↓
 
-&#x20;Relevant Knowledge
+  Relevant Knowledge
 
-&#x20;         ↓
+         ↓
 
-&#x20;Context Builder
+   Context Builder
 
 
 
@@ -546,19 +546,19 @@ Instead:
 
 ML Prediction
 
-&#x20;    +
+     +
 
 SHAP Explanation
-
-&#x20;    +
+  
+     +
 
 Retrieved Safety Knowledge
-
-&#x20;    ↓
+ 
+     ↓
 
 Hugging Face LLM
 
-&#x20;    ↓
+     ↓
 
 Grounded User Explanation
 
@@ -704,35 +704,35 @@ Typical workflow:
 
 Dataset
 
-&#x20; ↓
+ ↓
 
 Preprocessing
 
-&#x20; ↓
+ ↓
 
 Feature Engineering
 
-&#x20; ↓
+ ↓
 
 TF-IDF / BERT
 
-&#x20; ↓
+ ↓
 
 Model Training
 
-&#x20; ↓
+ ↓
 
 Evaluation
 
-&#x20; ↓
+ ↓
 
 SHAP / LIME
 
-&#x20; ↓
+ ↓
 
 RAG Vector Store
 
-&#x20; ↓
+ ↓
 
 FastAPI Inference
 
@@ -795,30 +795,13 @@ These files remain available in the local development environment and can be rep
 
 
 15\. Testing
+      tests/
 
-
+      Run: 
+      pytest
 
 Backend tests are located in:
-
-
-
-tests/
-
-
-
-Run:
-
-
-
-pytest
-
-
-
-For a backend runtime check:
-
-
-
-python -c "from src.models.inference\_service import InferenceService; s=InferenceService(); print('BACKEND RUNTIME: OK')"
+python -c "from src.models.inference_service import InferenceService; s=InferenceService(); print('BACKEND RUNTIME: OK')"
 
 16\. Design Principle
 
