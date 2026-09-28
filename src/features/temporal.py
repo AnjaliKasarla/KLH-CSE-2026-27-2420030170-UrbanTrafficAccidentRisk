@@ -4,7 +4,31 @@ Temporal feature engineering for the Urban Traffic Accident project.
 
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
+
+
+def _get_time_period(hour: float | int | None) -> str:
+    """Map an hour value to the model's time-period category."""
+
+    if hour is None or pd.isna(hour):
+        return "Unknown"
+
+    hour = int(hour)
+
+    if 5 <= hour < 12:
+        return "Morning"
+
+    if 12 <= hour < 17:
+        return "Afternoon"
+
+    if 17 <= hour < 21:
+        return "Evening"
+
+    if 21 <= hour <= 23:
+        return "Night"
+
+    return "Late_Night"
 
 
 def add_temporal_features(
@@ -76,13 +100,16 @@ def add_temporal_features(
             .astype("int8")
         )
 
+        processed_df["Time_Period"] = (
+            processed_df["Accident_Hour"]
+            .apply(_get_time_period)
+        )
+
     # ---------------------------------------------------------------
     # Cyclic time representation
     # ---------------------------------------------------------------
 
     if "Accident_Hour" in processed_df.columns:
-        import numpy as np
-
         hour = (
             processed_df["Accident_Hour"]
             .fillna(-1)
