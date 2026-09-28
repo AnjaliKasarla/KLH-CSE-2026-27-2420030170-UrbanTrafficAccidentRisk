@@ -13,8 +13,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 KNOWLEDGE_BASE = (
     PROJECT_ROOT
-    / "Code"
-    / "backend"
     / "data"
     / "external"
     / "knowledge_base"
@@ -172,3 +170,4 @@ def test_rag_weather_retrieval():
             "following distance",
         )
     )
+
