@@ -86,3 +86,20 @@ htmlcov/
 *.temp
 *.swp
 *.swo
+# Reorganized backend generated/local artifacts
+Code/backend/data/raw/*
+Code/backend/data/interim/*
+Code/backend/data/processed/*
+Code/backend/data/external/*
+
+# Keep the safety knowledge base
+!Code/backend/data/external/knowledge_base/
+!Code/backend/data/external/knowledge_base/road_safety_guidelines.md
+
+Code/backend/models/artifacts/*
+Code/backend/models/metadata/*
+
+Code/backend/reports/figures/*
+Code/backend/reports/metrics/*
+Code/backend/reports/final/*
+
