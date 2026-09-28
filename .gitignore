@@ -103,3 +103,27 @@ Code/backend/reports/figures/*
 Code/backend/reports/metrics/*
 Code/backend/reports/final/*
 
+
+# ------------------------------------------------------------
+# Additional temporary files
+# ------------------------------------------------------------
+*.bak
+*.orig
+
+# ------------------------------------------------------------
+# Frontend - Node
+# ------------------------------------------------------------
+Code/frontend/node_modules/
+Code/frontend/dist/
+Code/frontend/.vite/
+Code/frontend/.cache/
+
+# Frontend environment files
+Code/frontend/.env
+Code/frontend/.env.*
+!Code/frontend/.env.example
+
+# ------------------------------------------------------------
+# TypeScript
+# ------------------------------------------------------------
+*.tsbuildinfo
