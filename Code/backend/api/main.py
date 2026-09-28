@@ -3,6 +3,7 @@ FastAPI application for Urban Traffic Accident Risk Prediction.
 """
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from api.schemas import (
     AccidentPredictionRequest,
@@ -25,10 +26,34 @@ app = FastAPI(
 )
 
 
-# Load inference service once when the API starts.
+# ---------------------------------------------------------
+# CORS
+# ---------------------------------------------------------
+# Allows the React/Vite frontend to communicate with
+# the FastAPI backend during local development.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ---------------------------------------------------------
+# Inference service
+# ---------------------------------------------------------
+# Load the trained XGBoost model, preprocessor,
+# SHAP, RAG and LLM components once.
 inference_service = InferenceService()
 
 
+# ---------------------------------------------------------
+# Health check
+# ---------------------------------------------------------
 @app.get("/health")
 def health_check() -> dict:
     """Return API health status."""
@@ -43,6 +68,9 @@ def health_check() -> dict:
     }
 
 
+# ---------------------------------------------------------
+# Prediction
+# ---------------------------------------------------------
 @app.post(
     "/predict",
     response_model=AccidentPredictionResponse,
@@ -85,7 +113,7 @@ def predict(
             for item in result["retrieved_knowledge"]
         ]
 
-        # Return the complete prediction response.
+        # Return complete prediction response.
         return AccidentPredictionResponse(
             predicted_risk=result["predicted_risk"],
             probabilities=RiskProbabilities(
@@ -93,8 +121,6 @@ def predict(
             ),
             shap_contributions=shap_contributions,
             retrieved_knowledge=retrieved_knowledge,
-
-            # Return the actual grounded LLM explanation.
             explanation=result["explanation"],
         )
 

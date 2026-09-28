@@ -19,10 +19,10 @@ CLASS_NAMES = [
 ]
 
 
-def create_explainer(model: Any) -> shap.TreeExplainer:
+def create_explainer(model: Any, feature_names: list[str] | None = None) -> shap.TreeExplainer:
     """Create a TreeSHAP explainer for an XGBoost model."""
 
-    return shap.TreeExplainer(model)
+    return shap.TreeExplainer(model, feature_names=feature_names)
 
 
 def calculate_shap_values(
@@ -224,3 +224,6 @@ def save_local_contributions(
         output_path,
         index=False,
     )
+
+
+

@@ -117,8 +117,13 @@ class InferenceService:
             preprocessor_path
         )
 
+        self.shap_feature_names = list(
+            self.preprocessor.get_feature_names_out()
+        )
+
         self.shap_explainer = create_explainer(
-            self.model
+            self.model,
+            feature_names=self.shap_feature_names,
         )
 
         self.rag_pipeline = RAGPipeline()
@@ -269,6 +274,19 @@ class InferenceService:
 
         return feature_name.replace("_", " ")
 
+    @staticmethod
+    def _is_active_one_hot_feature(
+        feature_name: str,
+        transformed_value: float,
+    ) -> bool:
+        if '__' not in feature_name:
+            return True
+
+        if not feature_name.startswith('categorical__'):
+            return True
+
+        return bool(np.isclose(transformed_value, 1.0))
+
     def _calculate_shap(
         self,
         transformed,
@@ -280,16 +298,31 @@ class InferenceService:
             transformed,
         )
 
+        feature_names = self.shap_feature_names
+
         contributions = (
             get_local_feature_contributions(
                 shap_values=shap_values,
-                feature_names=list(
-                    self.preprocessor.get_feature_names_out()
-                ),
+                feature_names=feature_names,
                 sample_index=0,
                 class_index=predicted_class,
             )
         )
+
+        active_mask = [
+            self._is_active_one_hot_feature(
+                feature_name=str(feature_name),
+                transformed_value=float(transformed[0, index]),
+            )
+            for index, feature_name in enumerate(feature_names)
+        ]
+
+        contributions = contributions[
+            [
+                active_mask[feature_names.index(feature)]
+                for feature in contributions['feature']
+            ]
+        ]
 
         top_contributions = (
             contributions.head(10)
